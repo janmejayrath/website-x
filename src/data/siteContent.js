@@ -1,3 +1,10 @@
+import softwareIcdasDiagramImage from '../assets/images/software_ICDAS 3.1.png'
+import softwareArchitectureImage from '../assets/images/Architecture.png'
+import indexAboutImage from '../assets/images/index_about.png'
+import rvasImage from '../assets/images/rvas.png'
+import softwareSupportImage from '../assets/images/software_support.png'
+import softwareHeroImage from '../assets/images/software_hero.png'
+
 const palettes = {
   lilac: {
     base: '#d7c6e4',
@@ -103,6 +110,7 @@ export const navLinks = [
   { label: 'About Us', path: '/about' },
   { label: 'Products', path: '/products' },
   { label: 'Software', path: '/software' },
+  { label: 'Services', path: '/services' },
   { label: 'Contact Us', path: '/contact' },
 ]
 
@@ -174,11 +182,7 @@ export const homeContent = {
     width: 1100,
     height: 880,
   }),
-  aboutImage: createPlaceholderImage({
-    title: 'INDO CLIMATECARE',
-    subtitle: 'PVT LTD.',
-    palette: 'brick',
-  }),
+  aboutImage: indexAboutImage,
   videoImage: createPlaceholderImage({
     title: 'WATCH',
     subtitle: 'Corporate Presentation',
@@ -268,13 +272,7 @@ export const homeContent = {
 }
 
 export const aboutContent = {
-  heroImage: createPlaceholderImage({
-    title: '60K+',
-    subtitle: 'Sq Ft Facility',
-    palette: 'green',
-    width: 1200,
-    height: 850,
-  }),
+  heroImage: indexAboutImage,
   metrics: [
     { value: '60K+', label: 'Sq.ft state of the art manufacturing facility' },
     { value: '50+', label: 'Global export destinations' },
@@ -417,57 +415,320 @@ export const productsContent = {
 }
 
 export const softwareContent = {
-  heroImage: createPlaceholderImage({
-    title: 'SOFTWARE',
-    subtitle: 'Precision Solutions',
-    palette: 'charcoal',
-    width: 1500,
-    height: 900,
-  }),
-  tabs: ['ICDAS 3.1', 'RVAS', 'Online Software Support'],
-  diagramImage: createPlaceholderImage({
-    title: 'ICDAS',
-    subtitle: 'Remote Operations Diagram',
-    palette: 'green',
-    width: 1200,
-    height: 900,
-  }),
-  architectureImage: createPlaceholderImage({
-    title: 'SERVER ROOM',
-    subtitle: 'Software Architecture',
-    palette: 'mist',
-    width: 1500,
-    height: 980,
-  }),
-  benefits: [
-    'Server-based access from standard web browsers',
-    'Plug-and-play Ethernet integration with plant networks',
-    'Data log exports and alarm summaries through email workflows',
-    'Historical trends, live values, and task management in one interface',
+  heroImage: softwareHeroImage,
+  tabs: [
+    {
+      key: 'icdas',
+      label: 'ICDAS 3.1',
+      title: 'ICDAS 3.1',
+      subtitle: 'Access Anywhere Anytime.',
+      description:
+        'The ICDAS platform centralizes chamber management, improves operational visibility, and supports paperless monitoring across local and remote teams.',
+      benefits: [
+        'Server-based access from standard web browsers',
+        'Plug-and-play Ethernet integration with plant networks',
+        'Data log exports and alarm summaries through email workflows',
+        'Historical trends, live values, and task management in one interface',
+      ],
+      diagramImage: softwareIcdasDiagramImage,
+      diagramAlt: 'ICDAS 3.1 software diagram',
+      features: {
+        SYS: {
+          title: 'Installation',
+          icon: 'IN',
+          text:
+            'Streamlined setup guidance for chamber connectivity, controller onboarding, and operator readiness across new and existing installations.',
+          bullets: [
+            'Commissioning support for connected equipment',
+            'Network setup and controller communication checks',
+            'User onboarding and operational handover',
+            'Documentation alignment for regulated workflows',
+          ],
+        },
+        DATA: {
+          title: 'Data Management',
+          icon: 'DB',
+          text:
+            'Paperless reviews, audit trails, approval workflows, e-signatures, notifications, and runtime calculations are structured around a single operator console.',
+          bullets: [
+            'Alarm and activity histories remain searchable across connected equipment',
+            'Email and SMS escalation can be tied to user-defined event rules',
+            'Multi-level approvals support regulated documentation practices',
+            'Daily supervisory summaries reduce manual follow-up effort',
+          ],
+        },
+        CFG: {
+          title: 'Configuration',
+          icon: 'CF',
+          text:
+            'Configure chamber profiles, alarm thresholds, and user access to match site SOPs and day-to-day operational requirements.',
+          bullets: [
+            'Role-based access levels for operators and supervisors',
+            'Recipe templates and reusable configuration baselines',
+            'Alarm thresholds, delays, and escalation rules',
+            'Validated settings snapshots for change control',
+          ],
+        },
+        SAFE: {
+          title: 'Safe & Secure',
+          icon: 'SS',
+          text:
+            'Security and integrity controls designed for validated environments with traceable actions and protected records.',
+          bullets: [
+            'Access control with defined user permissions',
+            'Audit trails for critical actions and changes',
+            'Backup-ready records for retention policies',
+            'Secure operating practices for multi-user teams',
+          ],
+        },
+        OPS: {
+          title: 'Other Features',
+          icon: 'OP',
+          text:
+            'Practical tools that simplify monitoring, reporting, and daily follow-ups across multiple chambers and teams.',
+          bullets: [
+            'Scheduled summaries and export-ready reports',
+            'Quick views for alarms, tasks, and trends',
+            'Notification workflows for key events',
+            'Reusable templates for consistent operations',
+          ],
+        },
+      },
+      featureGroups: {
+        left: [
+          { label: 'Installation', code: 'SYS' },
+          { label: 'Data Management', code: 'DATA', active: true },
+          { label: 'Configuration', code: 'CFG' },
+        ],
+        right: [
+          { label: 'Safe & Secure', code: 'SAFE' },
+          { label: 'Other Features', code: 'OPS' },
+        ],
+      },
+      activeFeature: {
+        title: 'Data Management',
+        icon: 'DB',
+        text:
+          'Paperless reviews, audit trails, approval workflows, e-signatures, notifications, and runtime calculations are structured around a single operator console.',
+        bullets: [
+          'Alarm and activity histories remain searchable across connected equipment',
+          'Email and SMS escalation can be tied to user-defined event rules',
+          'Multi-level approvals support regulated documentation practices',
+          'Daily supervisory summaries reduce manual follow-up effort',
+        ],
+      },
+      architectureImage: softwareArchitectureImage,
+      architectureAlt: 'Software architecture diagram',
+    },
+    {
+      key: 'rvas',
+      label: 'RVAS',
+      title: 'REMOTE VIEW & ALARM SYSTEM (RVAS)',
+      subtitle: null,
+      description:
+        'Take remote monitoring to an in-depth level of information-sharing with the Remote View & Alarm System (RVAS).',
+      benefits: [
+        'View & Acknowledge real-time T/RH reading of EACH sensor',
+        'View status of each I/O Components (humidifier, heater, compressor, etc)',
+        'View status of Utilities (Main Supply, Door, Water Level)',
+      ],
+      diagramImage: rvasImage,
+      diagramAlt: 'Remote View & Alarm System (RVAS) diagram',
+      features: {
+        VAL: {
+          title: 'Validation',
+          icon: 'VR',
+          text:
+            'Structured validation flows combine task templates, evidence capture, and approval checkpoints so teams can execute and review work consistently.',
+          bullets: [
+            'Configurable task templates aligned to SOPs',
+            'Evidence and attachment capture for every step',
+            'Approval checkpoints and traceable sign-offs',
+            'Export-ready validation summaries for audits',
+          ],
+        },
+        RPT: {
+          title: 'Reports',
+          icon: 'RP',
+          text:
+            'Generate clear, shareable reports for alarms, trends, and system health to support faster decisions and documentation needs.',
+          bullets: [
+            'Alarm summaries and acknowledgements',
+            'Trend exports for temperature and humidity',
+            'Printable reports for review and filing',
+            'Scheduled delivery to reduce manual effort',
+          ],
+        },
+        ALRT: {
+          title: 'Notifications',
+          icon: 'AL',
+          text:
+            'Stay informed with event-driven alerts that help teams respond quickly to deviations across connected chambers.',
+          bullets: [
+            'Configurable alerts for critical events',
+            'Escalation paths for after-hours coverage',
+            'Clear status visibility for acknowledgements',
+            'Reduced response time for deviations',
+          ],
+        },
+        AUD: {
+          title: 'Audit Ready',
+          icon: 'AU',
+          text:
+            'Maintain traceable records and operational transparency for regulated environments and periodic reviews.',
+          bullets: [
+            'Event history with timestamps',
+            'Acknowledgement logs for alarms',
+            'Review-friendly record formatting',
+            'Retention-ready exports when required',
+          ],
+        },
+        API: {
+          title: 'Integrations',
+          icon: 'API',
+          text:
+            'Extend RVAS workflows with integrations that connect plant networks, monitoring utilities, and reporting systems.',
+          bullets: [
+            'Flexible connectivity for site requirements',
+            'Data sharing for dashboards and analytics',
+            'Export formats aligned to common tools',
+            'Scalable setup for multi-chamber sites',
+          ],
+        },
+      },
+      featureGroups: {
+        left: [
+          { label: 'Validation', code: 'VAL', active: true },
+          { label: 'Reports', code: 'RPT' },
+          { label: 'Notifications', code: 'ALRT' },
+        ],
+        right: [
+          { label: 'Audit Ready', code: 'AUD' },
+          { label: 'Integrations', code: 'API' },
+        ],
+      },
+      activeFeature: {
+        title: 'Validation',
+        icon: 'VR',
+        text:
+          'Structured validation flows combine task templates, evidence capture, and approval checkpoints so teams can execute and review work consistently.',
+        bullets: [
+          'Configurable task templates aligned to SOPs',
+          'Evidence and attachment capture for every step',
+          'Approval checkpoints and traceable sign-offs',
+          'Export-ready validation summaries for audits',
+        ],
+      },
+      architectureImage: softwareArchitectureImage,
+      architectureAlt: 'Software architecture diagram',
+    },
+    {
+      key: 'online-support',
+      label: 'Online Software Support',
+      title: 'Online Software Support',
+      subtitle: null,
+      description: [
+        'The efficiency of systems and processes can be significantly increased via a comprehensive energy optimisation.',
+        'Branch operations at below locations :',
+      ],
+      benefits: [
+        'In collaboration with our technical specialists, we’ll select the most efficient system for your test applications.',
+        'Customised equipment is developed and designed for specific user requirements.',
+        'By considering the complete system on-site e.g. testing facility, measuring devices and heat exchangers, we can tap into the full potential.',
+        'We will then determine the cost savings of your existing equipment.',
+        'New equipment operates within the optimal range thanks to efficient components and smart control.',
+      ],
+      diagramImage: softwareSupportImage,
+      diagramAlt: 'Online Software Support overview',
+      features: {
+        TKT: {
+          title: 'Ticketing',
+          icon: 'CS',
+          text:
+            'Track requests end-to-end with timestamps, ownership, and resolution notes so teams can coordinate support work across shifts and locations.',
+          bullets: [
+            'Priority queues and assignment visibility',
+            'Remote diagnostics with guided steps',
+            'Resolution notes and searchable history',
+            'Auto-generated service summaries',
+          ],
+        },
+        RMT: {
+          title: 'Remote Access',
+          icon: 'RM',
+          text:
+            'Enable faster troubleshooting through secure remote sessions and step-by-step guidance for on-site teams.',
+          bullets: [
+            'Guided troubleshooting for common issues',
+            'Remote checks to reduce downtime',
+            'Clear communication of next actions',
+            'Faster turnaround for critical requests',
+          ],
+        },
+        KB: {
+          title: 'Knowledge Base',
+          icon: 'KB',
+          text:
+            'Centralize repeatable fixes, SOP-aligned steps, and training references to improve consistency across teams.',
+          bullets: [
+            'Searchable articles for recurring scenarios',
+            'Standardized workflows for common tasks',
+            'Training references for new operators',
+            'Continuous improvement through updates',
+          ],
+        },
+        SLA: {
+          title: 'SLA Coverage',
+          icon: 'SLA',
+          text:
+            'Align response, resolution, and reporting with service expectations so stakeholders know what to expect and when.',
+          bullets: [
+            'Defined response windows by priority',
+            'Clear status updates during resolution',
+            'Service summaries for internal tracking',
+            'Escalation paths for urgent cases',
+          ],
+        },
+        LIVE: {
+          title: 'Live Updates',
+          icon: 'UP',
+          text:
+            'Keep teams informed with timely updates, progress visibility, and documented outcomes throughout the support lifecycle.',
+          bullets: [
+            'Status visibility for all open requests',
+            'Progress checkpoints and action items',
+            'Resolution confirmation and follow-up steps',
+            'Clear closure notes for future reference',
+          ],
+        },
+      },
+      featureGroups: {
+        left: [
+          { label: 'Ticketing', code: 'TKT', active: true },
+          { label: 'Remote Access', code: 'RMT' },
+          { label: 'Knowledge Base', code: 'KB' },
+        ],
+        right: [
+          { label: 'SLA Coverage', code: 'SLA' },
+          { label: 'Live Updates', code: 'LIVE' },
+        ],
+      },
+      activeFeature: {
+        title: 'Ticketing',
+        icon: 'CS',
+        text:
+          'Track requests end-to-end with timestamps, ownership, and resolution notes so teams can coordinate support work across shifts and locations.',
+        bullets: [
+          'Priority queues and assignment visibility',
+          'Remote diagnostics with guided steps',
+          'Resolution notes and searchable history',
+          'Auto-generated service summaries',
+        ],
+      },
+      architectureImage: softwareArchitectureImage,
+      architectureAlt: 'Software architecture diagram',
+    },
   ],
-  featureGroups: {
-    left: [
-      { label: 'Installation', code: 'SYS' },
-      { label: 'Data Management', code: 'DATA', active: true },
-      { label: 'Configuration', code: 'CFG' },
-    ],
-    right: [
-      { label: 'Safe & Secure', code: 'SAFE' },
-      { label: 'Other Features', code: 'OPS' },
-    ],
-  },
-  activeFeature: {
-    title: 'Data Management',
-    icon: 'DB',
-    text:
-      'Paperless reviews, audit trails, approval workflows, e-signatures, notifications, and runtime calculations are structured around a single operator console.',
-    bullets: [
-      'Alarm and activity histories remain searchable across connected equipment',
-      'Email and SMS escalation can be tied to user-defined event rules',
-      'Multi-level approvals support regulated documentation practices',
-      'Daily supervisory summaries reduce manual follow-up effort',
-    ],
-  },
 }
 
 export const contactContent = {

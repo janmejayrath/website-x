@@ -33,7 +33,7 @@ function About() {
         description="Indo Climatecare Pvt. Ltd. manufactures and supplies laboratory and clean room equipment for pharmaceutical, research, and process-critical environments."
         eyebrow="Indo Climatecare Pvt. Ltd."
         image={aboutContent.heroImage}
-        imageAlt="Indo Climatecare Pvt Ltd. building placeholder"
+        imageAlt="Indo Climatecare Pvt Ltd. overview"
         theme="mist"
         title="About Us"
       />

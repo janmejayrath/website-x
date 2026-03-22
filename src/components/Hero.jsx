@@ -13,6 +13,7 @@ function Hero({
   description,
   image,
   imageAlt,
+  visual,
   primaryAction,
   secondaryAction,
   overlayText,
@@ -167,7 +168,7 @@ function Hero({
 
           <div className="hero__visual">
             <div className="hero__visual-card">
-              <img src={image} alt={imageAlt} />
+              {visual ?? (image ? <img src={image} alt={imageAlt} /> : null)}
             </div>
           </div>
         </div>

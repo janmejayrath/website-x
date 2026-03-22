@@ -46,14 +46,6 @@ function Navbar({ currentPath, navigate }) {
           </nav>
 
           <div className="navbar__meta">
-            <button
-              className="button button--solid navbar__cta"
-              type="button"
-              onClick={() => navigate('/services')}
-            >
-              Services
-            </button>
-
             <div className="navbar__language">
               <span aria-hidden="true">🇬🇧</span>
               <span>English</span>

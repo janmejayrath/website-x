@@ -1,9 +1,36 @@
+import { useState } from 'react'
 import Hero from '../components/Hero'
 import { softwareContent } from '../data/siteContent'
 
+function getDefaultFeatureCode(tab) {
+  const leftActive = tab?.featureGroups?.left?.find((item) => item.active)?.code
+  const rightActive = tab?.featureGroups?.right?.find((item) => item.active)?.code
+  const leftFirst = tab?.featureGroups?.left?.[0]?.code
+  const rightFirst = tab?.featureGroups?.right?.[0]?.code
+
+  return leftActive || rightActive || leftFirst || rightFirst || ''
+}
+
 function Software({ navigate }) {
+  const tabs = softwareContent.tabs
+  const [activeTabKey, setActiveTabKey] = useState(() => softwareContent.tabs[0]?.key ?? '')
+  const activeTab =
+    tabs.find((tab) => tab.key === activeTabKey) ?? tabs[0] ?? null
+  const [activeFeatureCode, setActiveFeatureCode] = useState(() =>
+    getDefaultFeatureCode(softwareContent.tabs[0]),
+  )
+
+  if (!activeTab) {
+    return null
+  }
+
+  const activeFeature =
+    activeTab.features?.[activeFeatureCode] ??
+    activeTab.features?.[getDefaultFeatureCode(activeTab)] ??
+    activeTab.activeFeature
+
   return (
-    <>
+    <div className="software-page">
       <Hero
         description="We provide precise and innovative software solutions for stability operations, task visibility, and validated records."
         image={softwareContent.heroImage}
@@ -13,96 +40,117 @@ function Software({ navigate }) {
       />
 
       <section className="section section--tight">
-        <div className="container software-tabs" aria-label="Software suite">
-          {softwareContent.tabs.map((tab, index) => (
-            <span
-              key={tab}
-              className={`software-tabs__item ${index === 0 ? 'is-active' : ''}`}
+        <div className="container software-tabs" role="tablist" aria-label="Software suite">
+          {softwareContent.tabs.map((tab) => (
+            <button
+              key={tab.key}
+              id={`software-tab-${tab.key}`}
+              className={`software-tabs__item ${tab.key === activeTab.key ? 'is-active' : ''}`}
+              type="button"
+              role="tab"
+              aria-selected={tab.key === activeTab.key}
+              aria-controls="software-panel"
+              onClick={() => {
+                setActiveTabKey(tab.key)
+                setActiveFeatureCode(getDefaultFeatureCode(tab))
+              }}
             >
-              {tab}
-            </span>
+              {tab.label}
+            </button>
           ))}
         </div>
       </section>
 
-      <section className="section">
-        <div className="container content-split">
-          <div className="software-copy">
-            <h2>ICDAS 3.1</h2>
-            <h3>Access Anywhere Anytime.</h3>
-            <p>
-              The ICDAS platform centralizes chamber management, improves operational
-              visibility, and supports paperless monitoring across local and remote
-              teams.
-            </p>
+      <div id="software-panel" role="tabpanel" aria-labelledby={`software-tab-${activeTab.key}`}>
+        <section className="section">
+          <div className="container content-split">
+            <div className="software-copy">
+              <h2>{activeTab.title}</h2>
+              {activeTab.subtitle ? <h3>{activeTab.subtitle}</h3> : null}
+              {(Array.isArray(activeTab.description) ? activeTab.description : [activeTab.description])
+                .filter(Boolean)
+                .map((text, index) => (
+                  <p key={`${activeTab.key}-description-${index}`}>{text}</p>
+                ))}
 
-            <h3>Key Benefits</h3>
-            <ul className="bullet-grid">
-              {softwareContent.benefits.map((benefit) => (
-                <li key={benefit}>{benefit}</li>
+              <h3>Key Benefits</h3>
+              <ul className="bullet-grid">
+                {activeTab.benefits.map((benefit) => (
+                  <li key={benefit}>{benefit}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="diagram-panel diagram-panel--contain">
+              <img src={activeTab.diagramImage} alt={activeTab.diagramAlt} />
+            </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="container feature-hub">
+            <div className="feature-stack">
+              {activeTab.featureGroups.left.map((item) => (
+                <button
+                  key={item.code}
+                  className={`feature-stack__item ${item.code === activeFeatureCode ? 'is-active' : ''}`}
+                  type="button"
+                  aria-pressed={item.code === activeFeatureCode}
+                  onClick={() => setActiveFeatureCode(item.code)}
+                >
+                  <span>{item.label}</span>
+                  <span className="feature-stack__icon">{item.code}</span>
+                </button>
               ))}
-            </ul>
-          </div>
+            </div>
 
-          <div className="diagram-panel">
-            <img src={softwareContent.diagramImage} alt="ICDAS software diagram placeholder" />
-          </div>
-        </div>
-      </section>
+            {activeFeature ? (
+              <article className="feature-hub__core">
+                <div className="feature-hub__icon">{activeFeature.icon}</div>
+                <h3>{activeFeature.title}</h3>
+                {activeFeature.text ? <p>{activeFeature.text}</p> : null}
 
-      <section className="section">
-        <div className="container feature-hub">
-          <div className="feature-stack">
-            {softwareContent.featureGroups.left.map((item) => (
-              <div
-                key={item.label}
-                className={`feature-stack__item ${item.active ? 'is-active' : ''}`}
-              >
-                <span>{item.label}</span>
-                <span className="feature-stack__icon">{item.code}</span>
-              </div>
-            ))}
-          </div>
+                {activeFeature.bullets?.length ? (
+                  <ul className="feature-hub__list">
+                    {activeFeature.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </article>
+            ) : null}
 
-          <article className="feature-hub__core">
-            <div className="feature-hub__icon">{softwareContent.activeFeature.icon}</div>
-            <h3>{softwareContent.activeFeature.title}</h3>
-            <p>{softwareContent.activeFeature.text}</p>
-
-            <ul className="feature-hub__list">
-              {softwareContent.activeFeature.bullets.map((bullet) => (
-                <li key={bullet}>{bullet}</li>
+            <div className="feature-stack">
+              {activeTab.featureGroups.right.map((item) => (
+                <button
+                  key={item.code}
+                  className={`feature-stack__item ${item.code === activeFeatureCode ? 'is-active' : ''}`}
+                  type="button"
+                  aria-pressed={item.code === activeFeatureCode}
+                  onClick={() => setActiveFeatureCode(item.code)}
+                >
+                  <span>{item.label}</span>
+                  <span className="feature-stack__icon">{item.code}</span>
+                </button>
               ))}
-            </ul>
-          </article>
-
-          <div className="feature-stack">
-            {softwareContent.featureGroups.right.map((item) => (
-              <div key={item.label} className="feature-stack__item">
-                <span>{item.label}</span>
-                <span className="feature-stack__icon">{item.code}</span>
-              </div>
-            ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="section">
-        <div className="container">
-          <div className="section-header">
-            <p className="section-header__eyebrow">Software</p>
-            <h2 className="section-header__title">Architecture</h2>
-          </div>
+        <section className="section">
+          <div className="container">
+            <div className="section-header">
+              <p className="section-header__eyebrow">{activeTab.label}</p>
+              <h2 className="section-header__title">Architecture</h2>
+            </div>
 
-          <div className="map-card">
-            <img
-              src={softwareContent.architectureImage}
-              alt="Software architecture placeholder"
-            />
+            <div className="map-card">
+              <img src={activeTab.architectureImage} alt={activeTab.architectureAlt} />
+            </div>
           </div>
-        </div>
-      </section>
-    </>
+        </section>
+      </div>
+    </div>
   )
 }
 

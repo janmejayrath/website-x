@@ -28,7 +28,7 @@ function Home({ navigate }) {
         <div className="container">
           <div className="about-preview">
             <div className="about-preview__media">
-              <img src={homeContent.aboutImage} alt="Indo Climatecare Pvt Ltd. facility placeholder" />
+              <img src={homeContent.aboutImage} alt="Indo Climatecare Pvt Ltd. overview" />
             </div>
             <div className="about-preview__body">
               <p className="section-header__eyebrow">About Us</p>

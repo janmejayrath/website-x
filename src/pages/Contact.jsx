@@ -7,10 +7,17 @@ function Contact() {
       <Hero
         description="Connect with our sales, service, and engineering teams for product consultations, software demos, or support planning."
         eyebrow="Customer Support"
-        image={contactContent.heroImage}
-        imageAlt="Contact support placeholder"
         theme="mist"
         title="Contact Us"
+        visual={
+          <iframe
+            title="Indo Climatecare Pvt. Ltd. location map"
+            src="https://www.google.com/maps?cid=18218935279595074748&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAEYASAB&hl=en&gl=IN&source=embed"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+        }
       />
 
       <section className="section">
@@ -107,14 +114,6 @@ function Contact() {
               <p>{location.text}</p>
             </article>
           ))}
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <div className="map-card">
-            <img src={contactContent.mapImage} alt="Facility map placeholder" />
-          </div>
         </div>
       </section>
     </>
